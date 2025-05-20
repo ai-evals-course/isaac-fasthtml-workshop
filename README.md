@@ -13,9 +13,9 @@ This talk shows a tool, but the tool you choose isn't actually the important thi
 ## Agenda:
 
 1. ~ 15 min: Show a real annotation app actively being used for developing a commercial product (AnkiHub)
-    + Talk about use case
-    + Why it's important
+    + Talk about use case (Retrievel in medical domain)
     + Dataset Challenges
+    + Show the actual eval app and how it's used
 1. ~ 5 min: Very briefly introduce fasthtml/web apps in general
 1. ~ 30 min: Walk through the `main_sqlite` application code in the `app` directory
 1. ~ 5 min: Deployment
