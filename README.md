@@ -27,8 +27,8 @@ There are 2 application in this repository showing introductory simple annotatio
 - `app/main_in_memory.py`: Best place to start to understand how things work in a simple example.  Supports only good/bad rating, stores ratings in a python dict, uses a csv file for the dataset, and lets you download the ratings in a json.  This is intended to be a way to learn incrementally, not be the ideal app.
 - `app/main_sqlite.py`:  This is a full annotation app that uses a sqlite database.  While minimal it has the core features you need to get started and is an example of a great starting point for this use-case.  This includes both rating and annotating the results.
 
-![Index Page](index_page.png)
-![Evaluate Page](evaluate_page.png)
+![Index Page](./images/index_page.png)
+![Evaluate Page](./images/evaluate_page.png)
 
 ## Resources to Learn FastHTML
 
