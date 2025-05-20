@@ -1,0 +1,16 @@
+---
+description: Rules for implementing common UI elements in MonsterUI idiomatically
+globs: 
+alwaysApply: false
+---
+When you want to create new UI components or design with MonsterUI leverage the following resources.
+
+When creating UI elements create idiomatic MonsterUI as shown in any of the examples provided that minimizes code duplication and vertical space.
+
+Common cases:
+- For Card based designs see [ui_cards.md](mdc:project-templates/project-templates/project-templates/project-templates/project-templates/project-templates/project-templates/project-templates/project-templates/MonsterUI/ref_docs/ui_cards.md) for lots of card examples
+- For examples of forms and user inputs see [ui_forms.md](mdc:project-templates/project-templates/project-templates/project-templates/project-templates/project-templates/project-templates/project-templates/project-templates/MonsterUI/ref_docs/ui_forms.md) for lots of examples
+- For exaples of tables, which are great for lists of things that have buttons or actions see [ui_tables.md](mdc:project-templates/project-templates/project-templates/project-templates/project-templates/project-templates/project-templates/project-templates/project-templates/MonsterUI/ref_docs/ui_tables.md)
+- For the API reference see [monsterui_api.md](mdc:project-templates/project-templates/project-templates/project-templates/project-templates/project-templates/MonsterUI/ref_docs/monsterui_api.md)
+
+For all examples see [monsterui-llms-ctx.txt](mdc:project-templates/project-templates/project-templates/project-templates/project-templates/project-templates/MonsterUI/ref_docs/monsterui-llms-ctx.txt) that covers anything else you may need.  Include this for anything tricky or complicated.
