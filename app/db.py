@@ -35,7 +35,7 @@ def populate_annotations():
                 input=row['input'],
                 document=doc['document'],
                 eval_type='',
-                notes=''))
+                notes=''    ))
 
 if __name__ == "__main__":
     populate_annotations()

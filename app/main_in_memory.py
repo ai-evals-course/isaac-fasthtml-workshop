@@ -36,12 +36,12 @@ def get():
         body.append({
             'Input': f"{df.loc[example_id]['input'][:125]}...",
             'Action': A("Evaluate", 
-                        cls=('uk-btn', ButtonT.primary), 
+                        cls=AT.primary, 
                         href=evaluate.to(example_id=example_id))
         })
     
     return Container(
-        A("Download Annotations", href=get_annotations.to(), cls=('uk-btn', ButtonT.secondary)),        
+        A("Download Annotations", href=get_annotations.to(), cls=AT.primary),        
         H1("Evaluation Index"),
         TableFromDicts(header, body)
     )
@@ -62,7 +62,7 @@ def evaluate(example_id:str):
         H1("Evaluating Input"),
         render_md(_row['input']),
         TableFromDicts(header, body),
-        A("Back to Index", href="/", cls=('uk-btn', ButtonT.secondary))
+        A("Back to Index", href="/", cls=AT.primary)
     )
 
 @rt

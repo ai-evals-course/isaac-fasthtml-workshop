@@ -1,0 +1,237 @@
+---
+title: "Building Annotation Apps with FastHTML"
+subtitle: "A Practical Guide to Building Evaluation Tools"
+format: 
+  revealjs:
+    theme: simple
+    embed-resources: true
+    slide-number: true
+    incremental: false
+    code-fold: true
+    highlight-style: github
+    footer: "Isaac Flath - AI Evals Workshop"
+    css: styles.css
+    background-color: "#f7fafd"
+    width: 1400
+    height: 1000
+    margin: 0.02
+    transition: slide
+    center: true
+    preview-links: true
+    link-color: "#1a365d"
+    code-block-bg: "#f7fafd"
+    code-block-border-left: "4px solid #1a365d"
+    title-slide-attributes:
+      data-background-color: "#1a365d"
+      data-background-gradient: "linear-gradient(135deg, #1a365d 0%, #2d4a7c 100%)"
+    font-family: "Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif"
+---
+
+## Agenda
+
+- Discuss the real world use case
+- Show the actual application
+- Brief "what is FastHTML"
+- Walk through and explain code of a minimal version (code available after the lecture)
+- Resources & Q&A
+
+## Actual Commercial Use-Case
+
+- **Labcodes**: Brazilian software studio that designs and develops high-quality web applications: [labcodes.com.br](https://labcodes.com.br/)
+- **AnkiHub**: Supercharge your Anki flashcards with collaboration and AI-powered tools: [ankihub.net](https://www.ankihub.net/)
+- **Me**: 
+    + R&D at Answer AI, FastHTML contributor, MonsterUI creator.
+    + Consulting for search/retrieval/RAG use cases: [isaacflath.com/consulting/](https://isaacflath.com/consulting/)
+
+## Use Case Info
+
+- Real-world use case: AnkiHub (medical flashcard platform)
+- Medical students to find flashcards for their exam
+- Dataset challenges:
+  - Variable length queries
+  - Technical medical domain
+  - Short documents for long queries
+
+## Login
+
+![](ankihub_login.png)
+
+## Main Page
+
+![](ankihub_main_page.png)
+
+## Evaluate Page
+
+![](ankihub_evaluate.png)
+
+## Finalize
+
+![](ankihub_finalize.png)
+
+## Push to Pheonix
+
+![](ankihub_admin.png)
+
+
+## What is FastHTML?
+
+- Web development framework for Python
+- Minimal boilerplate
+- Prioritizes simplicity and developer productivity
+- Less language switching
+
+## Should you learn FastHTML?
+
+- The tool isn't what's important
+- fastapi, streamlit, shiny, etc. are all good options for this
+- If you want to be able to build web app quickly and can't, yes
+- If you can build web app quickly, no need.  Though might be interesting 🤷‍♂️
+
+## FastHTML Example
+
+```python
+from fasthtml.common import *
+from monsterui.all import *
+
+app, rt = fast_app(hdrs=Theme.blue.headers())
+
+@rt
+def index():
+    return Card(
+        H1("Hello World"), 
+        Button("Ex Button", cls=ButtonT.primary))
+
+serve()
+```
+
+## FastHTML Example
+
+```python
+from fasthtml.common import *
+from monsterui.all import *
+
+app, rt = fast_app(hdrs=Theme.blue.headers())
+
+@rt
+def index():
+    return Card(
+        H1("Hello World"), 
+        Button("Ex Button", cls=ButtonT.primary))
+
+serve()
+```
+
+## Database Setup
+
+```python
+class Annotation:
+    input_id: str # Unique identifier for the query
+    document_id: int # Document retrieved
+    input: str # The query
+    document: str # The retrieved documnet content
+    notes: str # Anotator Notes
+    eval_type: str # Good or Bad
+
+db = Database('eval.db')
+db.annotations = db.create(Annotation,
+    pk=('input_id', 'document_id'), 
+    transform=True)
+```
+
+## Main Page
+
+![](main_page.png)
+
+## Main Page Code
+
+```python
+@rt
+def index():
+    body = []
+    unique_inputs = list(db.annotations.rows_where(select='distinct input_id, input'))
+    for unique_input in unique_inputs:
+        body.append({
+            'Input': f"{unique_input['input'][:125]}...",
+            'Action': A("Evaluate", 
+                        cls=('uk-btn', ButtonT.primary), 
+                        href=evaluate.to(input_id=unique_input['input_id']))})
+    
+    return Container(
+        H1("Evaluation Index"),
+        TableFromDicts(['Input', 'Action'], body))
+```
+
+## Evaluate Page
+
+![](evaluate_page.png)
+
+## Evaluate Page Code
+
+```python
+@rt
+def evaluate(input_id:str):
+    documents = list(db.annotations.rows_where('input_id=?', [input_id]))
+    body = []
+    for doc in documents:
+        body.append({
+            'Output': render_md(doc['document']),
+            'Notes': Input(value=doc['notes'], 
+                           cls='min-w-96',
+                           name='notes',
+                           hx_post=update_notes.to(input_id=input_id, document_id=doc['document_id']),
+                           hx_trigger='change'),
+            'Evaluation': eval_buttons(input_id, doc['document_id'])})
+    
+    return Container(
+        H1("Evaluating Input"),
+        Card(render_md(documents[0]['input'].replace('\\n', '\n'))),
+        TableFromDicts(['Output', 'Notes', 'Evaluation'], body))
+```
+
+## Update Notes
+
+```python
+@rt
+def update_notes(input_id: str, document_id: int, notes: str):
+    record = Annotation(input_id=input_id, document_id=document_id, notes=notes)
+    db.annotations.update(record)
+```
+
+## Evaluate Buttons
+
+```python
+def eval_buttons(input_id:str, document_id:int=None):
+    target_id = f"#eval-{input_id}-{document_id}" if document_id is not None else f"#eval-{input_id}"
+    _annotation = db.annotations[input_id, document_id]
+    
+    def create_eval_button(label: str):
+        """Create an evaluation button with consistent properties."""
+        return Button(label,
+            hx_post=evaluate_doc.to(input_id=input_id, document_id=document_id, eval_type=label.lower()),
+            hx_target=target_id,
+            cls=ButtonT.primary if _annotation.eval_type == label.lower() else ButtonT.secondary,
+            submit=False)
+    
+    return DivLAligned(
+        create_eval_button("Good"), create_eval_button("Bad"),
+        id=target_id[1:])
+```
+
+## Evaluate Document
+
+```python
+@rt
+def evaluate_doc(input_id:str, document_id:int, eval_type:str):
+    db.annotations.update(Annotation(input_id=input_id, document_id=document_id, eval_type=eval_type))
+    return eval_buttons(input_id, document_id)
+```
+
+## Deployment Options
+
+- Railway (recommended)
+- Plash (Answer AI's hosting service currently in beta)
+- Any Starlette-compatible hosting
+
+## Resources
+
+Code, links to learning resources, and more can be found in [github repo](https://github.com/ai-evals-course/isaac-fasthtml-workshop)

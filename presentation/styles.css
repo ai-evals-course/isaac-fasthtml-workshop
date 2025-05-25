@@ -1,0 +1,230 @@
+/* Isaac Flath Consulting Theme */
+
+:root {
+    --primary-blue: #1a365d;
+    --accent-blue: #2d4a7c;
+    --light-bg: #f7fafd;
+    --white: #fff;
+    --gray: #e2e8f0;
+    --text-dark: #1a365d;
+    --text-light: #2d4a7c;
+    --border-color: #4299e1;
+}
+
+.reveal .slides {
+    text-align: left;
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background: var(--light-bg);
+}
+
+/* Title slide styling */
+.reveal .title-slide, .reveal .slides section:first-child {
+    text-align: center !important;
+    color: var(--white) !important;
+    background: linear-gradient(135deg, var(--primary-blue) 0%, var(--accent-blue) 100%);
+    box-shadow: none;
+}
+
+.reveal .title-slide h1, .reveal .slides section:first-child h1 {
+    font-size: 3.5em;
+    margin-bottom: 0.4em;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    color: var(--white);
+}
+
+.reveal .title-slide h2, .reveal .slides section:first-child h2 {
+    font-size: 2em;
+    opacity: 0.95;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    color: var(--white);
+}
+
+/* Section headers - balanced spacing */
+.reveal h2 {
+    color: var(--primary-blue);
+    font-size: 2em;
+    margin-top: 0.2em;
+    margin-bottom: 0.6em;
+    border-bottom: 2px solid var(--gray);
+    padding-bottom: 0.2em;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+}
+
+/* List styling - balanced spacing */
+.reveal ul {
+    margin-left: 1.5em;
+    margin-top: 0.3em;
+}
+
+.reveal ul li {
+    margin-bottom: 0.8em;
+    line-height: 1.5;
+    font-size: 1.1em;
+    color: var(--text-light);
+}
+
+/* Code block styling - balanced spacing */
+.reveal pre {
+    box-shadow: 0 4px 12px rgba(26, 54, 93, 0.08);
+    border-radius: 12px;
+    margin: 1.2em 0;
+    border: 1px solid var(--gray);
+    background: var(--light-bg);
+}
+
+.reveal code {
+    font-family: 'Fira Code', 'JetBrains Mono', monospace;
+    font-size: 0.95em;
+    line-height: 1.5;
+    color: var(--primary-blue);
+}
+
+/* Card-like containers - balanced spacing */
+.reveal .card, .reveal .container, .reveal table {
+    background: var(--white);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(26, 54, 93, 0.08);
+    border: 1px solid var(--gray);
+    padding: 1.5em;
+    margin: 1.2em 0;
+}
+
+/* Table styling - balanced spacing */
+.reveal table {
+    border-collapse: collapse;
+    width: 100%;
+    overflow: hidden;
+}
+
+.reveal th {
+    background-color: var(--primary-blue);
+    color: var(--white);
+    padding: 0.8em;
+    font-weight: 500;
+    text-align: left;
+    font-size: 1em;
+}
+
+.reveal td {
+    padding: 0.8em;
+    border: 1px solid var(--gray);
+    color: var(--text-light);
+    font-size: 1em;
+}
+
+/* Link styling */
+.reveal a {
+    color: var(--primary-blue);
+    text-decoration: none;
+    transition: all 0.2s ease;
+    border-bottom: 1px solid transparent;
+    font-weight: 500;
+}
+
+.reveal a:hover {
+    color: var(--accent-blue);
+    border-bottom: 1px solid var(--accent-blue);
+}
+
+/* Footer styling */
+.reveal .footer {
+    position: absolute;
+    bottom: 1.2em;
+    left: 1.2em;
+    font-size: 0.75em;
+    color: var(--accent-blue);
+    font-weight: 500;
+}
+
+/* Slide number styling */
+.reveal .slide-number {
+    color: var(--primary-blue);
+    font-size: 0.85em;
+    opacity: 0.8;
+}
+
+/* Progress bar styling */
+.reveal .progress {
+    color: var(--primary-blue);
+    height: 4px;
+}
+
+/* Code syntax highlighting customization */
+.hljs-keyword {
+    color: #805ad5;
+}
+
+.hljs-string {
+    color: #2c5282;
+}
+
+.hljs-comment {
+    color: #718096;
+    font-style: italic;
+}
+
+.hljs-function {
+    color: #2b6cb0;
+}
+
+.hljs-number {
+    color: #805ad5;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .reveal h2 {
+        font-size: 1.6em;
+    }
+    .reveal pre {
+        font-size: 0.8em;
+    }
+    .reveal ul li {
+        font-size: 1em;
+    }
+}
+
+/* Additional professional touches - balanced spacing */
+.reveal .slides section {
+    padding: 1.2em 2.5em 2.5em 2.5em;
+    height: 100%;
+    border-left: 4px solid var(--border-color);
+    margin-left: 0.5em;
+}
+
+.reveal strong {
+    color: var(--primary-blue);
+    font-weight: 600;
+}
+
+.reveal em {
+    color: var(--accent-blue);
+    font-style: italic;
+}
+
+.reveal ul li::marker {
+    color: var(--primary-blue);
+}
+
+/* Subtle background pattern */
+.reveal .slides {
+    background-image: 
+        linear-gradient(rgba(255, 255, 255, 0.97), rgba(255, 255, 255, 0.97)),
+        url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%231a365d' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* Image styling */
+.reveal img {
+    box-shadow: 0 8px 24px rgba(26, 54, 93, 0.15);
+    border-radius: 8px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.reveal img:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px rgba(26, 54, 93, 0.2);
+} 
