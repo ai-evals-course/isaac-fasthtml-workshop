@@ -7,23 +7,22 @@ This project should use the modern, concise, and best practices for building Rea
 
 # Primary Libraries
 
-See [package.json](mdc:frontend/package.json) for the specific libraries and versions you should use!
+See [package.json](mdc:fastapi_react_app/frontend/package.json) for the specific libraries and versions you should use!
 When making recommendations, make sure you are referencing the correct verions! Double check your work.
 
-- ReactRouter Framework (the latest version, >= v.7) 
 - Mantine (the latest version, >= v.7) for the UI
 - Tailwind CSS (the latest version, >= v.4) for styling if you can't do this with Mantine (always prefer Mantine)
+- TanStack Router
 - TanStack Query
 - Zustand, 
 - react-hook-form
 - Zod
-- automatic generation of typescript types for my OpenAPI compatible fastAPI backend in `/backend`
+- automatic generation of typescript types for my OpenAPI compatible fastAPI backend in `../backend.py`
 
 # Rules
 
 - Use TypeScript for all code. Prefer interfaces over types. Avoid enums, use const objects or maps.
-- Use recommended practices for ReactRouter v7.
-- Prefer SSR over CSR.
+- Use recommended practices routing with TanStack Router
 - Prefer using just Mantine for the UI but also apply tailwind CSS as needed.
 - Implement responsive, mobile-first design with Mantine.
 - Use lowercase with dashes for directories (e.g., components/auth-wizard).
