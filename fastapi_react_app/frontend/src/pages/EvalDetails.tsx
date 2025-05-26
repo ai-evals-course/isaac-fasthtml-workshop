@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import { useNavigate, useParams } from "@tanstack/react-router";
 import { Container, Title, Card, Table, Button, Textarea, Loader, Center, Group, ScrollArea, Text } from "@mantine/core";
+import { useDebouncedValue } from "@mantine/hooks";
 
 // Define types for our data
 interface DocumentType {
@@ -20,16 +21,30 @@ interface EvaluationRowProps {
   localNotesValue: string;
   onNotesChange: (documentId: string, newNotes: string) => void;
   onEvalUpdate: (documentId: string, evalType: string) => void;
+  onSaveNotes: (documentId: string, notes: string) => void;
 }
 
-const EvaluationRow = React.memo(({ doc, localNotesValue, onNotesChange, onEvalUpdate }: EvaluationRowProps) => {
+const EvaluationRow = React.memo(({ doc, localNotesValue, onNotesChange, onEvalUpdate, onSaveNotes }: EvaluationRowProps) => {
+  const [notes, setNotes] = useState(localNotesValue);
+  const [debouncedNotes] = useDebouncedValue(notes, 750);
+
+  // Effect to handle debounced saving
+  useEffect(() => {
+    if (debouncedNotes !== localNotesValue) {
+      onSaveNotes(doc.document_id, debouncedNotes);
+    }
+  }, [debouncedNotes, doc.document_id, localNotesValue, onSaveNotes]);
+
   return (
     <Table.Tr>
       <Table.Td>{doc.document}</Table.Td>
       <Table.Td>
         <Textarea
-          value={localNotesValue}
-          onChange={(e) => onNotesChange(doc.document_id, e.target.value)}
+          value={notes}
+          onChange={(e) => {
+            setNotes(e.target.value);
+            onNotesChange(doc.document_id, e.target.value);
+          }}
           placeholder="Add notes..."
           rows={3}
           style={{ minWidth: 280 }}
@@ -129,13 +144,9 @@ export function EvaluatePage() {
     [inputId]
   );
 
-  const handleNotesChange = useCallback(
-    (documentId: string, newNotes: string) => {
-      setLocalNotesValues((prev) => ({ ...prev, [documentId]: newNotes }));
-      saveNotesToServer(documentId, newNotes);
-    },
-    [saveNotesToServer]
-  );
+  const handleNotesChange = useCallback((documentId: string, newNotes: string) => {
+    setLocalNotesValues((prev) => ({ ...prev, [documentId]: newNotes }));
+  }, []);
 
   const updateEval = useCallback(
     async (documentId: string, evalType: string) => {
@@ -204,6 +215,7 @@ export function EvaluatePage() {
                 localNotesValue={localNotesValues[doc.document_id] ?? doc.notes ?? ""}
                 onNotesChange={handleNotesChange}
                 onEvalUpdate={updateEval}
+                onSaveNotes={saveNotesToServer}
               />
             ))}
           </Table.Tbody>
