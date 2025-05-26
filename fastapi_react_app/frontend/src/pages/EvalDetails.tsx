@@ -178,7 +178,7 @@ export function EvaluatePage() {
   if (!data) return <Container>No data found</Container>;
 
   return (
-    <Container>
+    <Container fluid h={50}>
       <Title>Evaluating Input</Title>
 
       <Card>{data.input.replace(/\n/g, "\n")}</Card>

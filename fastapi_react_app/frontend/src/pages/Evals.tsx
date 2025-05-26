@@ -24,7 +24,7 @@ export function IndexPage() {
     );
 
   return (
-    <Container>
+    <Container fluid h={50}>
       <Title>Evaluation Index</Title>
       <Card>
         <Table>
