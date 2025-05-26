@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import { useNavigate, useParams } from "@tanstack/react-router";
-import { Container, Title, Card, Table, Button, Textarea, Loader, Center, Group } from "@mantine/core";
+import { Container, Title, Card, Table, Button, Textarea, Loader, Center, Group, ScrollArea, Text } from "@mantine/core";
 
 // Define types for our data
 interface DocumentType {
@@ -181,7 +181,11 @@ export function EvaluatePage() {
     <Container fluid h={50}>
       <Title>Evaluating Input</Title>
 
-      <Card>{data.input.replace(/\n/g, "\n")}</Card>
+      <Card withBorder>
+        <ScrollArea h={300} type="always" scrollbarSize={8}>
+          <Text style={{ whiteSpace: "pre-wrap" }}>{data.input}</Text>
+        </ScrollArea>
+      </Card>
 
       <Card>
         <Table>
