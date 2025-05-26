@@ -10,9 +10,10 @@
   "dependencies": {
     "@mantine/core": "^8.0.1",
     "@mantine/hooks": "^8.0.1",
+    "@tanstack/react-router": "^1.120.10",
+    "@tanstack/router-devtools": "^1.120.10",
     "react": "^19.1.0",
-    "react-dom": "^19.1.0",
-    "react-router-dom": "^7.6.1"
+    "react-dom": "^19.1.0"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.4.1",
