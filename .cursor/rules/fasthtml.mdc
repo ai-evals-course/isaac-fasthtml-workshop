@@ -1,7 +1,7 @@
 ---
 description: 
-globs: 
-alwaysApply: true
+globs: fasthtml_app/**/*
+alwaysApply: false
 ---
 
 # Project Structure
