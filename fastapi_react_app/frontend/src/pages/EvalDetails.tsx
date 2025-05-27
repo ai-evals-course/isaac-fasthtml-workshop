@@ -199,27 +199,29 @@ export function EvaluatePage() {
       </Card>
 
       <Card>
-        <Table>
-          <Table.Thead>
-            <Table.Tr>
-              <Table.Th>Output</Table.Th>
-              <Table.Th w={300}>Notes</Table.Th>
-              <Table.Th w={200}>Evaluation</Table.Th>
-            </Table.Tr>
-          </Table.Thead>
-          <Table.Tbody>
-            {data.documents.map((doc: DocumentType) => (
-              <EvaluationRow
-                key={doc.document_id}
-                doc={doc}
-                localNotesValue={localNotesValues[doc.document_id] ?? doc.notes ?? ""}
-                onNotesChange={handleNotesChange}
-                onEvalUpdate={updateEval}
-                onSaveNotes={saveNotesToServer}
-              />
-            ))}
-          </Table.Tbody>
-        </Table>
+        <ScrollArea h="calc(90vh - 400px)" type="always" scrollbarSize={8}>
+          <Table>
+            <Table.Thead>
+              <Table.Tr>
+                <Table.Th>Output</Table.Th>
+                <Table.Th w={300}>Notes</Table.Th>
+                <Table.Th w={200}>Evaluation</Table.Th>
+              </Table.Tr>
+            </Table.Thead>
+            <Table.Tbody>
+              {data.documents.map((doc: DocumentType) => (
+                <EvaluationRow
+                  key={doc.document_id}
+                  doc={doc}
+                  localNotesValue={localNotesValues[doc.document_id] ?? doc.notes ?? ""}
+                  onNotesChange={handleNotesChange}
+                  onEvalUpdate={updateEval}
+                  onSaveNotes={saveNotesToServer}
+                />
+              ))}
+            </Table.Tbody>
+          </Table>
+        </ScrollArea>
       </Card>
 
       <Button variant="outline" onClick={() => navigate({ to: "/" })}>
