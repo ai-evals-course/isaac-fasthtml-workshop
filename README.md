@@ -4,6 +4,8 @@ This is the companion repo that has shareable information used in Isaac Flath's 
 
 It contains everything covered in the talk + more.
 
+The slides can be found [here](https://ai-evals-course.github.io/isaac-fasthtml-workshop/presentation/talk.html)
+
 ## Why FastHTML?
 
 I like it because it feels like the most python native web development framework with the least boilerplate.
