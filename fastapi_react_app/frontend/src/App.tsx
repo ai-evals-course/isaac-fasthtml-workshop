@@ -18,7 +18,6 @@ declare module "@tanstack/react-router" {
 }
 
 function App() {
-  // return <RouterProvider router={router} />;
   return (
     <AppShell header={{ height: 60 }} padding="md">
       <AppShell.Header>
