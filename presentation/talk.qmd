@@ -1,6 +1,6 @@
 ---
 title: "Building Annotation Apps with FastHTML"
-subtitle: "A Practical Guide to Building Evaluation Tools"
+subtitle: "Isaac Flath"
 format: 
   revealjs:
     theme: simple
