@@ -1,5 +1,7 @@
 # ai-evals-workshop-materials
 
+> For [AI Evals Course](https://bit.ly/evals-ai)
+
 This is the companion repo that has shareable information used in Isaac Flath's annotation app in fasthtml workshop.
 
 It contains everything covered in the talk + more.
