@@ -236,8 +236,10 @@ def evaluate_doc(input_id:str, document_id:int, eval_type:str):
 
 Companion repo: [github.com/ai-evals-course/isaac-fasthtml-workshop](https://github.com/ai-evals-course/isaac-fasthtml-workshop)
 
-- Code for the app we reviews
+- Code for the app we reviewed
 - Code for a simpler version of the app to learn from
 - Links to learning resources for FastHTML, HTMX, and more.
 - Links to information about how to deploy the app and where
 - Cursor rules files and reference docs used to create the code with Cursor
+- README instructions, fastapi/react app, dependencies setup all thanks to Wayge Gillian 
+    - Check out ohmeow.com 

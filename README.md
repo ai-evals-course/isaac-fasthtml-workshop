@@ -27,11 +27,17 @@ The talk can be found in `presentation/talk.html`.  Open it in any browser.
 
 There are 2 application in this repository showing introductory simple annotation apps.
 
-- `app/main_in_memory.py`: Best place to start to understand how things work in a simple example.  Supports only good/bad rating, stores ratings in a python dict, uses a csv file for the dataset, and lets you download the ratings in a json.  This is intended to be a way to learn incrementally, not be the ideal app.
-- `app/main_sqlite.py`:  This is a full annotation app that uses a sqlite database.  While minimal it has the core features you need to get started and is an example of a great starting point for this use-case.  This includes both rating and annotating the results.
+- `fasthtml_app/main_in_memory.py`: Best place to start to understand how things work in a simple example.  Supports only good/bad rating, stores ratings in a python dict, uses a csv file for the dataset, and lets you download the ratings in a json.  This is intended to be a way to learn incrementally, not be the ideal app.
+- `fasthtml_app/main_sqlite.py`:  This is a full annotation app that uses a sqlite database.  While minimal it has the core features you need to get started and is an example of a great starting point for this use-case.  This includes both rating and annotating the results.
+
+To run check out the [fasthtml app's readme](./fasthtml_app/README.md)
 
 ![Index Page](./images/index_page.png)
 ![Evaluate Page](./images/evaluate_page.png)
+
+## Bonus App
+
+There's a fastapi/react version in `fastapi_react_app` - check out the [fastapi/react app's readme](./fastapi_react_app/README.md) to run both the frontend and backend.
 
 ## Resources to Learn FastHTML
 

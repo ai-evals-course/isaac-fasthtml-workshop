@@ -37,13 +37,13 @@ uv add -r requirements.txt
 
 Choose one of the following applications to run:
 
-### In-Memory Demo
+### In-Memory Demo (simplest version)
 
 ```bash
 uv run main_in_memory.py
 ```
 
-### SQLite Demo
+### SQLite Demo (from the talk)
 
 ```bash
 uv run main_sqlite.py
