@@ -5,7 +5,7 @@ __pycache__/
 node_modules/
 # C extensions
 *.so
-
+talk_files/
 # Distribution / packaging
 .Python
 build/

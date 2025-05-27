@@ -241,5 +241,5 @@ Companion repo: [github.com/ai-evals-course/isaac-fasthtml-workshop](https://git
 - Links to learning resources for FastHTML, HTMX, and more.
 - Links to information about how to deploy the app and where
 - Cursor rules files and reference docs used to create the code with Cursor
-- README instructions, fastapi/react app, dependencies setup all thanks to Wayge Gillian 
+- README instructions, fastapi/react app, dependencies setup all thanks to Wayde Gillian 
     - Check out ohmeow.com 
