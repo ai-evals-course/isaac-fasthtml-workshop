@@ -41,7 +41,7 @@ format:
 - **AnkiHub**: Supercharge your Anki flashcards with collaboration and AI-powered tools: [ankihub.net](https://www.ankihub.net/)
 - **Me**: 
     + R&D at Answer AI, FastHTML contributor, MonsterUI creator.
-    + Consulting for search/retrieval/RAG use cases: [isaacflath.com/consulting/](https://isaacflath.com/consulting/)
+    + Independent Consulting for products that use AI: [isaacflath.com/consulting/](https://isaacflath.com/consulting/)
 
 ## Use Case Info
 
@@ -238,8 +238,8 @@ Companion repo: [github.com/ai-evals-course/isaac-fasthtml-workshop](https://git
 
 - Code for the app we reviewed
 - Code for a simpler version of the app to learn from
-- Links to learning resources for FastHTML, HTMX, and more.
+- Links to learning resources for FastHTML, HTMX, and more
 - Links to information about how to deploy the app and where
-- Cursor rules files and reference docs used to create the code with Cursor
+- Cursor rules files and reference docs used to create the code
 - README instructions, fastapi/react app, dependencies setup all thanks to Wayde Gillian 
     - Check out ohmeow.com 
