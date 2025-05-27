@@ -6,6 +6,8 @@ It contains everything covered in the talk + more.
 
 The slides can be found [here](https://ai-evals-course.github.io/isaac-fasthtml-workshop/presentation/talk.html)
 
+Credit:  Thank you to [Wayde Gilliam (ohmeow)](www.ohmeow.com) for contributions to fastapi/react app version, documentation, readme, uv dependency setup, and more.
+
 ## Why FastHTML?
 
 I like it because it feels like the most python native web development framework with the least boilerplate.
