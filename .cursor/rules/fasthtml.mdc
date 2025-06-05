@@ -6,9 +6,9 @@ alwaysApply: false
 
 # Project Structure
 
-The main file for the project is [app/main.py](mdc:project-templates/project-templates/project-templates/project-templates/project-templates/project-templates/project-templates/project-templates/project-templates/project-templates/project-templates/project-templates/project-templates/project-templates/app/main.py). It uses MonsterUI for styling.  MonsterUI is a python first UI component library that primarily leverages FrankenUI and Tailwind, but also includes headers and functionality form DaisyUI, Katex, HighlightJS, and others.
+The main file for the project is [main_sqlite.py](mdc:fasthtml_app/main_sqlite.py) It uses MonsterUI for styling.  MonsterUI is a python first UI component library that primarily leverages FrankenUI and Tailwind, but also includes headers and functionality form DaisyUI, Katex, HighlightJS, and others.
 
-You can run the server with the command`python app/main.py`, which will start the server on http://localhost:5001.
+You can run the server with the command `python app/main_sqlite.py`, which will start the server on http://localhost:5001.
 
 # Tech Stack
 
@@ -20,15 +20,15 @@ You can run the server with the command`python app/main.py`, which will start th
 
 These are relevant documents that should be referenced while building a FastHTML App.
 
-- [htmx.md](mdc:project-templates/project-templates/project-templates/project-templates/project-templates/project-templates/project-templates/project-templates/project-templates/project-templates/project-templates/project-templates/project-templates/project-templates/MonsterUI/ref_docs/htmx.md): Minimal HTMX integration exaples to show how HTMX can be used with fasthtml
-- [db.md](mdc:project-templates/project-templates/project-templates/project-templates/project-templates/project-templates/project-templates/project-templates/project-templates/project-templates/project-templates/project-templates/project-templates/project-templates/ref_docs/db.md): MiniDataAPI Spec for database operations
-- [monsterui-llms-ctx.txt](mdc:project-templates/project-templates/project-templates/project-templates/project-templates/project-templates/project-templates/project-templates/project-templates/project-templates/project-templates/MonsterUI/ref_docs/monsterui-llms-ctx.txt): MonsterUI full API list and idiomatic examples for UI components
+- [fasthtml.mdc](mdc:.cursor/rules/fasthtml.mdc): Minimal HTMX integration exaples to show how HTMX can be used with fasthtml
+- [db.md](mdc:ref_docs/db.md): MiniDataAPI Spec for database operations
+- [monsterui_api.md](mdc:ref_docs/monsterui_api.md).md : MonsterUI full API list and idiomatic examples for UI components
 
 # FastHTML examples
 
 Reference these examples when constructing new FastHTML applications.
 
-- [annotation.md](mdc:project-templates/project-templates/project-templates/project-templates/project-templates/project-templates/project-templates/project-templates/project-templates/project-templates/project-templates/project-templates/project-templates/MonsterUI/ref_docs/annotation.md): A siple example of a annotation app to evaluate search results.  
+- [annotation.md](mdc:ref_docs/annotation.md): A siple example of a annotation app to evaluate search results.  
 - Adv_app: Example FastHTML To-Do-List application that demonstrates core FastHTML features including authentication, HTMX integration, and database operations. It allows users to create, edit, delete, and reorder todos with markdown support, using SQLite for storage.
 
 # FastHTML Rules
