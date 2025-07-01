@@ -62,4 +62,4 @@ uv run flet run --web --port 1234 main.py
 - `main.py`: The app
 - `requirements.txt`: Project dependencies
 
-The sample data file by default loaded from `../fasthtml_app/ds.csv`. You can change it with.
+By default, the sample data is loaded from `../fasthtml_app/ds.csv`.
