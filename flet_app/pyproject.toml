@@ -1,0 +1,10 @@
+[project]
+name = "flet-app"
+version = "0.1.0"
+description = "A simple annotation app built with Flet"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "flet[all]>=0.28.3",
+    "pandas>=2.3.0",
+]
