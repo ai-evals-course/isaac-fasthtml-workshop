@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Powered FastHTML Development</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #0a0a0a;
+            color: #ffffff;
+            overflow: hidden;
+        }
+        
+        .presentation {
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .slide {
+            height: 100vh;
+            width: 100vw;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 4rem;
+            position: relative;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+        }
+        
+        .slide.active {
+            display: flex;
+        }
+        
+        .slide-number {
+            position: absolute;
+            bottom: 2rem;
+            right: 2rem;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .brand {
+            position: absolute;
+            top: 2rem;
+            left: 2rem;
+            font-size: 1rem;
+            color: #667eea;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+        
+        .brand:hover {
+            opacity: 1;
+        }
+        
+        .brand::before {
+            content: '⚡';
+            font-size: 1.2rem;
+        }
+        
+        h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 2rem;
+            text-align: center;
+            line-height: 1.2;
+        }
+        
+        h2 {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        h3 {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #b8b8b8;
+            margin-bottom: 1.5rem;
+        }
+        
+        .subtitle {
+            font-size: 1.5rem;
+            color: #888;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .content {
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .feature-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.3);
+        }
+        
+        .feature-card h4 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #667eea;
+        }
+        
+        .feature-card p {
+            color: #ccc;
+            line-height: 1.6;
+        }
+        
+        .code-block {
+            background: #1e1e1e;
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+            overflow-x: auto;
+            font-family: 'Fira Code', 'Consolas', monospace;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            position: relative;
+            white-space: pre-wrap;
+            text-align: left;
+        }
+        
+        .code-block::before {
+            content: attr(data-lang);
+            position: absolute;
+            top: 0.5rem;
+            right: 1rem;
+            font-size: 0.8rem;
+            color: #666;
+            text-transform: uppercase;
+        }
+        
+        .highlight {
+            color: #667eea;
+            font-weight: bold;
+        }
+        
+        .screenshot-placeholder {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 16px;
+            padding: 4rem;
+            text-align: center;
+            margin: 2rem 0;
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            border: 2px dashed rgba(255, 255, 255, 0.3);
+        }
+        
+        .screenshot-placeholder h3 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+        
+        .screenshot-placeholder p {
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .cta {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem 3rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.2rem;
+            display: inline-block;
+            margin-top: 2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.5);
+        }
+        
+        .navigation {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 1rem;
+            z-index: 1000;
+        }
+        
+        .nav-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        
+        .nav-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .workflow-steps {
+            display: flex;
+            justify-content: space-between;
+            margin: 3rem 0;
+            position: relative;
+        }
+        
+        .workflow-steps::before {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            z-index: -1;
+        }
+        
+        .step {
+            background: #1a1a2e;
+            border: 2px solid #667eea;
+            border-radius: 50%;
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: bold;
+        }
+        
+        .step-content {
+            text-align: center;
+            margin-top: 1rem;
+        }
+        
+        .terminal {
+            background: #000;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+        
+        .terminal-header {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .terminal-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        
+        .terminal-dot.red { background: #ff5f56; }
+        .terminal-dot.yellow { background: #ffbd2e; }
+        .terminal-dot.green { background: #27c93f; }
+        
+        .terminal-content {
+            font-family: 'Fira Code', monospace;
+            color: #0f0;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.8s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation">
+        <!-- Slide 1: Title -->
+        <div class="slide active">
+            <div class="brand">elite-ai-assisted-coding.dev</div>
+            <h1>AI-Powered FastHTML Development</h1>
+            <p class="subtitle">Building Annotation Apps with Claude + FastHTML</p>
+            <div class="terminal" style="margin-top: 4rem;">
+                <div class="terminal-header">
+                    <div class="terminal-dot red"></div>
+                    <div class="terminal-dot yellow"></div>
+                    <div class="terminal-dot green"></div>
+                </div>
+                <div class="terminal-content">
+                    $ claude-code "Let's build a RAG annotation tool"<br>
+                    <span style="color: #667eea;">🤖 Planning architecture...</span><br>
+                    <span style="color: #764ba2;">🚀 Generating FastHTML code...</span><br>
+                    <span style="color: #0f0;">✓ App ready at localhost:5001</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2: YouTube Video -->
+        <div class="slide">
+            <div class="brand">elite-ai-assisted-coding.dev</div>
+            <h2>See It In Action</h2>
+            <div style="position: relative; width: 90%; max-width: 1200px; margin: 2rem auto;">
+                <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+                    <iframe 
+                        src="https://www.youtube.com/embed/eda3dVwMlAo" 
+                        title="AI-Powered FastHTML Development Demo" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                        allowfullscreen
+                        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 16px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: The Challenge -->
+        <div class="slide">
+            <div class="brand">elite-ai-assisted-coding.dev</div>
+            <h2>The Challenge</h2>
+            <div class="content">
+                <h3 style="text-align: center; margin-bottom: 3rem;">Building a RAG Annotation Tool</h3>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h4>~ 7K Records</h4>
+                        <p>Domain experts need to annotate thousands of RAG results efficiently</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>Really fast annotation</h4>
+                        <p>Updates without any page refreshes so annotators can get through a lot quickly</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>Two-Page App</h4>
+                        <p>Query list view + Document annotation view</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: The AI Workflow -->
+        <div class="slide">
+            <div class="brand">elite-ai-assisted-coding.dev</div>
+            <h2>AI-Assisted Development Workflow</h2>
+            <div class="workflow-steps">
+                <div style="margin-bottom: 2.5rem; margin-right: 4rem;">
+                    <div class="step">1</div>
+                    <div class="step-content">
+                        <h4>Context</h4>
+                        <br>
+                        <p>.ruler/</p>
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 2.5rem; margin-right: 4rem;">
+                    <div class="step">2</div>
+                    <div class="step-content">
+                        <h4>Plan</h4>
+                        <br>
+                        <p>plan.md</p>
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 2.5rem; margin-right: 4rem;">
+                    <div class="step">3</div>
+                    <div class="step-content">
+                        <h4>Generate</h4>
+                        <br>
+                        <p>Claude Code</p>
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 2.5rem;">
+                    <div class="step">4</div>
+                    <div class="step-content">
+                        <h4>Test</h4>
+                        <br>
+                        <p>MCP Server</p>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="code-block" data-lang="markdown">## plan.md
+
+- Database schema definition
+- Page architecture  
+- UI component specifications
+- HTMX interaction patterns
+</div> -->
+        </div>
+
+        <!-- Slide 4: Ruler Configuration -->
+        <div class="slide">
+            <div class="brand">elite-ai-assisted-coding.dev</div>
+            <h2>LLM Context with .ruler</h2>
+            <div class="content">
+                <div class="code-block" data-lang="yaml"><span class="highlight">.ruler/</span>
+├── api_conventions_monsterui.md  <span style="color: #666;"># UI component guidelines</span>
+└── project_context.md            <span style="color: #666;"># FastHTML patterns</span></div>
+                <div class="feature-grid" style="margin-top: 2rem;">
+                    <div class="feature-card">
+                        <h4>MonsterUI Components</h4>
+                        <p>Pre-configured component library with consistent styling</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>FastHTML Patterns</h4>
+                        <p>Best practices for routing, database operations, and HTMX</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Ruler Apply -->
+        <div class="slide">
+            <div class="brand">elite-ai-assisted-coding.dev</div>
+            <h2>Auto-Distribute to Any AI Agent</h2>
+            <div style="position: relative; width: 90%; max-width: 1200px; margin: 2rem auto;">
+                <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+                    <iframe 
+                        src="https://www.youtube.com/embed/DmQehBipL8I" 
+                        title="Ruler Apply Demo" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                        allowfullscreen
+                        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 16px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Plan.md - Initial Ask -->
+        <div class="slide">
+            <div class="brand">elite-ai-assisted-coding.dev</div>
+            <h2>Start with a Clear Plan</h2>
+            <div class="screenshot-placeholder">
+                <img src="InitialAskFor Plan.png" alt="Initial Ask for Plan" style="max-width: 80%; margin: 1.5rem auto; display: block; border-radius: 8px; box-shadow: 0 2px 12px #0001;">
+            </div>
+        </div>
+
+        <!-- Slide 7: Plan.md - Checking Data -->
+        <div class="slide">
+            <div class="brand">elite-ai-assisted-coding.dev</div>
+            <h2>AI Validates Against Real Data</h2>
+            <div class="screenshot-placeholder">
+                <img src="ClaudeCheckingData.png" alt="Claude Checking Data" style="max-width: 80%; margin: 1.5rem auto; display: block; border-radius: 8px; box-shadow: 0 2px 12px #0001;">
+            </div>
+        </div>
+
+        <!-- Slide 8: Plan.md - Fixing Plan -->
+        <div class="slide">
+            <div class="brand">elite-ai-assisted-coding.dev</div>
+            <h2>Iterating on the Plan</h2>
+            <div class="screenshot-placeholder">
+                <img src="FixingPlan.png" alt="Fixing Plan" style="max-width: 80%; margin: 1.5rem auto; display: block; border-radius: 8px; box-shadow: 0 2px 12px #0001;">
+            </div>
+        </div>
+
+        <!-- Slide 9: MCP Server Magic -->
+        <div class="slide">
+            <div class="brand">elite-ai-assisted-coding.dev</div>
+            <h2>Live Testing with MCP Server</h2>
+            <div class="content">
+                <div class="code-block" data-lang="python">
+# mcp_server.py
+@mcp.tool
+async def <span class="highlight">start_app</span>():
+    """Starts the fasthtml application with browser automation"""
+    
+@mcp.tool
+async def <span class="highlight">get_console_logs</span>():
+    """Captures browser console for debugging"""
+
+@mcp.tool
+async def <span class="highlight">navigate_to</span>(path: str = "/") -> str:
+    """Navigate the browser to a specific path in the application."""
+
+@mcp.tool
+async def <span class="highlight">click_element</span>(selector: str):
+    """Interacts with the UI programmatically"""
+                </div>
+                <p style="text-align: center; color: #888; margin-top: 2rem;">
+                    Claude can now do simple testing a human would do like navigate around and click things, and see browser console logs.
+                </p>
+            </div>
+        </div>
+
+        <!-- Slide 10: MCP 404 Screenshot -->
+        <div class="slide">
+            <div class="brand">elite-ai-assisted-coding.dev</div>
+            <h2>MCP Catches Errors Automatically</h2>
+            <div class="screenshot-placeholder">
+                <img src="mcp-404.png" alt="MCP 404 Error Detection" style="max-width: 80%; margin: 1.5rem auto; display: block; border-radius: 8px; box-shadow: 0 2px 12px #0001;">
+            </div>
+        </div>
+
+        <!-- Slide 11: MCP Click Test Screenshot -->
+        <div class="slide">
+            <div class="brand">elite-ai-assisted-coding.dev</div>
+            <h2>Automated UI Testing</h2>
+            <div class="screenshot-placeholder">
+                <img src="mcp-click-test.png" alt="MCP Click Testing" style="max-width: 80%; margin: 1.5rem auto; display: block; border-radius: 8px; box-shadow: 0 2px 12px #0001;">
+            </div>
+        </div>
+
+        <!-- Slide 12: App Screenshot 1 -->
+        <div class="slide">
+            <div class="brand">elite-ai-assisted-coding.dev</div>
+            <h2>The Result: Query List View</h2>
+            <div class="screenshot-placeholder">
+                <!-- <h3>Screenshot: Query List Page</h3> -->
+                <img src="annotation-main-page.png" alt="Query List Page Screenshot" style="max-width: 80%; margin: 1.5rem auto; display: block; border-radius: 8px; box-shadow: 0 2px 12px #0001;">
+                <!-- <p>Shows all queries with annotation progress</p> -->
+                <!-- <p style="margin-top: 1rem; font-size: 0.9rem;">
+                    • Compact table with query text<br>
+                    • Document counts and progress<br>
+                    • One-click navigation to annotation
+                </p> -->
+            </div>
+        </div>
+
+        <!-- Slide 13: App Screenshot 2 -->
+        <div class="slide">
+            <div class="brand">elite-ai-assisted-coding.dev</div>
+            <h2>Document Annotation View</h2>
+            <div class="screenshot-placeholder">
+                <img src="annotation-evaluation-page.png" alt="Query List Page Screenshot" style="max-width: 80%; margin: 1.5rem auto; display: block; border-radius: 8px; box-shadow: 0 2px 12px #0001;">
+                <!-- <h3>📸 Screenshot: Annotation Interface</h3> -->
+                <!-- <p>Efficient annotation workflow</p> -->
+                <!-- <p style="margin-top: 1rem; font-size: 0.9rem;">
+                    • Fixed query header<br>
+                    • Good/Bad toggle buttons<br>
+                    • Inline notes editing<br>
+                    • Real-time HTMX updates
+                </p> -->
+            </div>
+        </div>
+
+        <!-- Slide 14: Key Benefits -->
+        <div class="slide">
+            <div class="brand">elite-ai-assisted-coding.dev</div>
+            <h2>Why This Approach Wins</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>Requires less energy and time</h4>
+                    <p>Save the time and energy for the interesting and hard parts</p>
+                </div>
+                <div class="feature-card">
+                    <h4>AI Understands Context</h4>
+                    <p>Ruler configs ensure consistent, idiomatic code</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Self-Testing Apps</h4>
+                    <p>MCP server enables automated testing during development and more context for the LLM</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Plan File</h4>
+                    <p>Plan files enable you to get consistent results from coding agents</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 15: CTA -->
+        <div class="slide">
+            <div class="brand">elite-ai-assisted-coding.dev</div>
+            <h1>Learn to Build Like This</h1>
+            <div style="text-align: center;">
+                <p style="font-size: 1.5rem; color: #888; margin-bottom: 3rem;">
+                    Master AI-powered development
+                </p>
+                <a href="https://bit.ly/ai-coding-course" class="cta">🎓 Join the AI Coding Course</a>
+                <p style="margin-top: 3rem; color: #666;">
+                    Follow my journey and get free exclusive content
+                </p>
+                <a href="https://elite-ai-assisted-coding.substack.com/" class="cta" style="background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);">
+                    📬 Subscribe to the Substack
+                </a>
+            </div>
+        </div>
+
+        <div class="slide-number">1 / 16</div>
+    </div>
+
+    <div class="navigation">
+        <button class="nav-btn" onclick="previousSlide()">← Previous</button>
+        <button class="nav-btn" onclick="nextSlide()">Next →</button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+
+        function showSlide(n) {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (n + totalSlides) % totalSlides;
+            slides[currentSlide].classList.add('active');
+            slides[currentSlide].classList.add('fade-in');
+            document.querySelector('.slide-number').textContent = `${currentSlide + 1} / ${totalSlides}`;
+        }
+
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+
+        function previousSlide() {
+            showSlide(currentSlide - 1);
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') nextSlide();
+            if (e.key === 'ArrowLeft') previousSlide();
+        });
+
+        // Touch/swipe support
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        document.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            if (touchEndX < touchStartX - 50) nextSlide();
+            if (touchEndX > touchStartX + 50) previousSlide();
+        }
+    </script>
+</body>
+</html>
