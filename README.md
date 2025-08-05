@@ -8,6 +8,8 @@ It contains everything covered in the talk + more.
 
 The slides can be found [here](https://ai-evals-course.github.io/isaac-fasthtml-workshop/presentation/talk.html)
 
+Video of the talk can be found [here](https://www.youtube.com/watch?v=fA4pe9bE0LY)
+
 Credit:  Thank you to [Wayde Gilliam (ohmeow)](https://ohmeow.com/) for contributions to fastapi/react app version, documentation, readme, uv dependency setup, and more.
 
 ## Why FastHTML?
